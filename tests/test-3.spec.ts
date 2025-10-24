@@ -18,10 +18,6 @@ test.describe('Data Table Interaction and Sorting', () => {
     // Click to sort
     await dueHeader.click();
 
-    // --------------------------------------------------------
-    // VERIFICACIÓN SIMPLIFICADA
-    // --------------------------------------------------------
-
     // Get values from table (Column 4 = Due)
     const actualValues = await getNumericColumnValues(table1, 4);
 
