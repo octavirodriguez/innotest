@@ -1,13 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-/* test.describe('Test group', () => {
-  test('seed', async ({ page }) => {
-    // generate code here.
-  });
-}); */
-
-
-
 import { DropdownPage } from '../pages/DropdownPage';
 
 test.describe('Dropdown Functionality Tests', () => {
