@@ -4,13 +4,17 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  // Prefer a single retry in CI to capture flaky failures with trace
+  retries: process.env.CI ? 1 : 0,
+  // Reduce workers in CI to avoid shared-state flakiness; local runs use default
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  // Use GitHub reporter in CI and preserve HTML report for local investigation
+  reporter: [['github'], ['html']],
   use: {
     baseURL: 'https://the-internet.herokuapp.com',
     trace: 'on-first-retry',
-    headless: false,
+    // Run headless on CI, but keep headed locally for easier dev debugging
+    headless: process.env.CI ? true : false,
   },
 
   projects: [

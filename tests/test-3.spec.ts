@@ -3,7 +3,7 @@ import { getNumericColumnValues } from '../TableUtils';
 
 test.describe('Data Table Interaction and Sorting', () => {
 
-  test('should correctly sort table1 by the "Due" column in ascending order', async ({ page }) => {
+  test('should correctly sort table1 by the "Due" column in ascending order @smoke', async ({ page }) => {
     await page.goto('/tables');
 
     // Define table locator

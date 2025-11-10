@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage"; // Adjust path as necessary
 
 test.describe("Secure Login Flow", () => {
-  test("should successfully log in and log out of the application", async ({
+  test("should successfully log in and log out of the application @smoke", async ({
     page,
   }) => {
     const loginPage = new LoginPage(page);
