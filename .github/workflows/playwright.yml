@@ -31,9 +31,9 @@ jobs:
           CI: true
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            npx playwright test -p ${{ matrix.browser }} --grep @smoke --reporter=github,html || true
+            npx playwright test -p ${{ matrix.browser }} --grep "@smoke" --reporter=github,html
           else
-            npx playwright test -p ${{ matrix.browser }} --reporter=github,html || true
+            npx playwright test -p ${{ matrix.browser }} --reporter=github,html
           fi
 
       - name: Upload Playwright report
