@@ -9,7 +9,7 @@ export default defineConfig({
   // Reduce workers in CI to avoid shared-state flakiness; local runs use default
   workers: process.env.CI ? 1 : undefined,
   // Use GitHub reporter in CI and preserve HTML report for local investigation
-  reporter: [['github'], ['html']],
+  reporter: [['github'], ['html', { title: 'Custom test run' }]],
   use: {
     baseURL: 'https://the-internet.herokuapp.com',
     trace: 'on-first-retry',
@@ -29,6 +29,10 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Webkit'] }
+    },
+    {
+      name: 'mobile chrome',
+      use: { ...devices['Mobile Chrome'] }
     }
   ],
 });
