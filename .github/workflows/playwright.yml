@@ -26,15 +26,20 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run smoke tests (PRs)
+        if: ${{ github.event_name == 'pull_request' }}
         env:
           CI: true
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            npx playwright test -p ${{ matrix.browser }} --grep "@smoke" --reporter=github,html
-          else
-            npx playwright test -p ${{ matrix.browser }} --reporter=github,html
-          fi
+          # Use long-form --project to avoid ambiguity with npx options
+          npx playwright test --project=${{ matrix.browser }} --grep "@smoke" --reporter=github,html
+
+      - name: Run full suite (pushes)
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          CI: true
+        run: |
+          npx playwright test --project=${{ matrix.browser }} --reporter=github,html
 
       - name: Upload Playwright report
         if: always()
